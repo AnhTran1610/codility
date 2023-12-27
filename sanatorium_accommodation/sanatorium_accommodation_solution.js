@@ -1,5 +1,5 @@
 function solution(A) {
-    const arr = A.sort((a, b) => a -b)
+    const arr = A.sort((a, b) => a - b)
     let counter = 0;
     for (let i = 0; i < arr.length; i++) {
         counter += 1;
