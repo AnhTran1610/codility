@@ -11,7 +11,7 @@ def solution(S):
             else:
                 if len(stack) >= 3:
                     counter += len(stack) // 3
-                stack = []
+                stack = [char]
 
     if len(stack) >= 3:
         counter += len(stack) // 3

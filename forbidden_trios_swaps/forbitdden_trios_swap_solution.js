@@ -11,7 +11,7 @@ function solution(S) {
                 if (stack.length >= 3) {
                     counter += Math.floor(stack.length / 3);
                 }
-                stack = [];
+                stack = [S[i]];
             }
         }
     }

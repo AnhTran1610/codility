@@ -1,15 +1,31 @@
-def solution(A, F, M):
-    denominator = len(A) + F
-    total_missing_value = M * denominator - sum(A)
+def solution(S, F, M):
+    total_length = (len(S) + F) * M
+    total_missing = total_length - sum(S)
 
-    # Check if the calculated missing values are within a valid range
-    if total_missing_value / F < 1 or total_missing_value / F > 6:
-        print([0])
+    if total_missing <= 0:
         return [0]
 
-    # Calculate the missing values and distribute them among the elements
-    res = [total_missing_value // F for i in range(F)]
-    res[0] += total_missing_value % F
+    avg = total_missing / F
 
-    print(res)
+    if avg > 6 or avg < 1:
+        return [0]
+
+    res = []
+
+    for i in range(F - 1):
+        res.append(int(avg))
+
+    remaining = total_missing - int(avg) * (F - 1)
+    curr_idx = 0
+
+    while curr_idx < F - 1 and remaining > 6:
+        res[curr_idx] += 1
+
+        if remaining - 1 < 1:
+            break
+
+        remaining -= 1
+        curr_idx += 1
+
+    res.append(remaining)
     return res
