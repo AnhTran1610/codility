@@ -1,11 +1,14 @@
 def solution(A):
     if len(A) == 1:
         return 1
-    elif len(A) == 2:
+    if len(A) == 2:
         return 2
-    elif len(A) == 3:
-        return 3 if A[0] == A[2] else 2
-    
+    if len(A) == 3:
+        if A[0] == A[2]:
+            return 3
+        else:
+            return 2
+
     max_length = 2
     curr_length = 2
     first = A[0]
