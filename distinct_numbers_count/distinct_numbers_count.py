@@ -1,47 +1,41 @@
 def solution(A):
     occurrence = []
-    obj = {}
-
-    # Count occurrences of each element in A
-    for element in A:
-        if obj.get(element) is None:
-            obj[element] = 1
+    occurrences_dict = {}
+    
+    # Count occurrences of each element
+    for elem in A:
+        if elem not in occurrences_dict:
+            occurrences_dict[elem] = 1
         else:
-            obj[element] += 1
-
-    # Collect the occurrences in a list
-    for key in obj:
-        occurrence.append(obj[key])
-
-    res_arr = []
-
-    # Generate a list of numbers from 1 to the maximum occurrence
-    for i in range(1, occurrence[-1] + 1):
-        res_arr.append(i)
-
+            occurrences_dict[elem] += 1
+    
+    # Store the counts in a list
+    occurrence.extend(occurrences_dict.values())
+    
+    res_arr = list(range(1, occurrence[-1] + 1))
+    
     num_of_occurrence = {}
-
-    # Count the occurrence of occurrences
-    for i in occurrence:
-        if num_of_occurrence.get(i) is None:
-            num_of_occurrence[i] = 1
+    
+    # Count the occurrences of occurrence counts
+    for count in occurrence:
+        if count not in num_of_occurrence:
+            num_of_occurrence[count] = 1
         else:
-            num_of_occurrence[i] += 1
-
+            num_of_occurrence[count] += 1
+    
     counter = 0
-
+    
     for i in range(len(occurrence)):
         occur_down = occurrence[i]
         occur = occurrence[i]
-
+        
+        # Handle occurrences with count greater than 1
         if num_of_occurrence[occur] > 1:
             num_of_occurrence[occur_down] -= 1
-
-            while num_of_occurrence[occur_down] > 0 and occur_down > 0:
+            while occur_down > 0 and occur_down in num_of_occurrence and num_of_occurrence[occur_down] > 0:
                 occur_down -= 1
                 counter += 1
-
             if occur_down > 0:
                 num_of_occurrence[occur_down] = 1
-
+    
     return counter

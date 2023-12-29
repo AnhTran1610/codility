@@ -14,7 +14,8 @@ def solution(A):
     first = A[0]
     second = A[1]
 
-    for i in range(2, len(A)):
+    i = 2
+    while i < len(A):
         if i == len(A) - 1:
             if A[i] == first:
                 curr_length += 1
@@ -39,6 +40,8 @@ def solution(A):
                 curr_length = 2
                 first = A[i - 1]
                 second = A[i]
+
+        i += 1
 
     if curr_length > max_length:
         max_length = curr_length
