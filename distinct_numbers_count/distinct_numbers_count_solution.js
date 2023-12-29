@@ -3,7 +3,7 @@ function solution(A) {
     let obj = {};
     for (let i = 0; i < A.length; i++) {
         if (obj[A[i]] === undefined) {
-            obj [A[i]] = 1;
+            obj[A[i]] = 1;
         } else {
             obj[A[i]] ++;
         }
@@ -11,7 +11,10 @@ function solution(A) {
     for (const i in obj) {
         occurance.push(obj[i]);
     }
-    occurance = occurance.sort((a, b) => b - a)
+    const resArr = [];
+    for (let i = 1; i <= occurance[occurance.length - 1]; i++) {
+        resArr.push(i);
+    }
     const numOfOccurance = {}
     for (const i of occurance) {
         if (numOfOccurance[i] === undefined) {
@@ -20,15 +23,19 @@ function solution(A) {
             numOfOccurance[i] ++;
         }
     }
-    const distinctOccurance = Object.keys(numOfOccurance).sort((a, b) => b - a);
-    console.log(distinctOccurance)
     let counter = 0;
-    let currMin = occurance[0] + 1;
-    for (let i = 0; i < distinctOccurance.length; i++) {
-        const num = Number(distinctOccurance[i]);
-        const c = distinctOccurance[i];
-        if (num < currMin) {
-            if (numOfOccurance[num] > 1)
+
+    for (let i = 0; i < occurance.length; i++) {
+        let occurDown = occurance[i];
+        let occur = occurance[i]
+        if (numOfOccurance[occur] > 1) {
+            numOfOccurance[occurDown]--;
+            while(numOfOccurance[occurDown] > 0 && occurDown > 0) {
+                occurDown--;
+                counter++;
+            }
+            if (occurDown > 0) numOfOccurance[occurDown] = 1;
         }
     }
+    return counter;
 }

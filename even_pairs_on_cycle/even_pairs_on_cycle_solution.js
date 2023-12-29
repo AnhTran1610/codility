@@ -15,10 +15,9 @@ function solution(A) {
     }
     arr.push(A[A.length - 1] + A[0])
 
-    let counter = 0;
+    let counter1 = 0;
     let isFirst = false;
     let isLast = false;
-
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] % 2 === 0) {
             if (i === 0) {
@@ -27,12 +26,20 @@ function solution(A) {
             if (i === arr.length - 1) {
                 isLast = true;
             }
-            counter++;
+            counter1++;
             i++;
         }
     }
     if (isFirst && isLast) {
-        counter--;
+        counter1--;
     }
-    return counter;
+    
+    let counter2 = 0;
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] % 2 === 0) {
+            counter2++;
+            i++;
+        }
+    }
+    return Math.max(counter1, counter2);
 }
