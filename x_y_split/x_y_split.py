@@ -32,3 +32,4 @@ def solution(S):
 
     # Return the sum of the two counters
     return counter + counter1
+
